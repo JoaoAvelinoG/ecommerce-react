@@ -1,10 +1,12 @@
-import type { JSX } from "react";
+import type { JSX } from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { AppRoutes } from './routes/AppRoutes';
 
 function App(): JSX.Element {
   return (
-    <div>
-      <p>Rotas</p>
-    </div>
+    <Router>
+      <AppRoutes />
+    </Router>
   );
 }
 
