@@ -1,5 +1,5 @@
-import { Footer } from '../Footer';
-import { Header } from '../Header';
+import { Footer } from '../Default/MainFooter/Footer';
+import { Header } from '../Default/MainHeader/Header';
 import { Topbar } from '../Home/Topbar';
 
 type DefaultLayoutProps = {
