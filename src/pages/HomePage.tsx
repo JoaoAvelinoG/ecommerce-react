@@ -1,7 +1,9 @@
+import { MainBanner } from '@/components/Home/MainBanner/MainBanner';
+
 export default function HomePage() {
   return (
-    <div>
-      <p>Home</p>
-    </div>
+    <>
+      <MainBanner />
+    </>
   );
 }

@@ -8,11 +8,11 @@ function App(): JSX.Element {
 
   return (
     <>
-      <h1>Device Detector</h1>
+      {/* <h1>Device Detector</h1>
       <p>Largura da tela: {screenWidth}px</p>
       {screenWidth < 768 && <p>Exibido apenas em telas menores que 768px</p>}
       <p>É mobile? {isMobile ? '✅ Sim' : '❌ Não'}</p>
-      <p>É iOS? {isIos ? '🍎 Sim' : 'Não'}</p>
+      <p>É iOS? {isIos ? '🍎 Sim' : 'Não'}</p> */}
       <Router>
         <AppRoutes />
       </Router>
