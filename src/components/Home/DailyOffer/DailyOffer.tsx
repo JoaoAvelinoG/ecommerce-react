@@ -1,27 +1,78 @@
 import { Container } from '@/components/Container';
-import { TimerIcon } from 'lucide-react';
+
+import { DailyOfferHeader } from './DailyOfferHeader';
+import { ProductSlider } from '@/components/Default/ProductSlider/ProductSlider';
+import type { Product } from '@/@types/product';
 
 export const DailyOffer = () => {
+  // TODO: Substituir por dados reais de uma API ou estado global
+  const mockProducts: Product[] = [
+    {
+      id: '1',
+      name: 'Tênis Asics Upcourt 6 Masculino',
+      oldPrice: 475.0,
+      finalPrice: 275.49,
+      paymentMethod: 'pix',
+      imageUrl: 'https://placehold.co/280x280',
+      badgesDiscount: '-42% OFF',
+      freeShipping: true,
+      productStamps: ['Novo', 'Exclusivo'],
+      isOnOffer: true,
+    },
+    {
+      id: '2',
+      name: 'Relógio Skmei 1335 Digital Retrô',
+      oldPrice: 120.0,
+      finalPrice: 69.54,
+      paymentMethod: 'pix',
+      imageUrl: 'https://placehold.co/280x280',
+      badgesDiscount: '-37% OFF',
+      freeShipping: false,
+      productStamps: ['Mais Vendido'],
+      isOnOffer: true,
+    },
+    {
+      id: '3',
+      name: 'Kit 3 Camisetas Básicas Masculinas',
+      oldPrice: 199.99,
+      finalPrice: 114.99,
+      imageUrl: 'https://placehold.co/280x280',
+      badgesDiscount: '-42% OFF',
+      freeShipping: false,
+      productStamps: ['Promoção'],
+      isOnOffer: true,
+    },
+    {
+      id: '4',
+      name: 'Tênis Infantil Asics Buzz 4 GS',
+      oldPrice: 349.99,
+      finalPrice: 189.99,
+      paymentMethod: 'pix',
+      imageUrl: 'https://placehold.co/280x280',
+      badgesDiscount: '-45% OFF',
+      freeShipping: true,
+      productStamps: ['Infantil'],
+      isOnOffer: true,
+    },
+    {
+      id: '5',
+      name: 'Mochila Fila Classic',
+      oldPrice: 229.9,
+      finalPrice: 159.9,
+      paymentMethod: 'avista',
+      imageUrl: 'https://placehold.co/280x280',
+      badgesDiscount: '-30% OFF',
+      freeShipping: true,
+      productStamps: ['Exclusivo Online'],
+      isOnOffer: true,
+    },
+  ];
+
   return (
     <>
-      <Container>
-        <div className='daily-offer-header w-full flex items-center justify-between text-white py-2 bg-amber-500 px-4'>
-          <div className='daily-offer-header__title flex items-center gap-3'>
-            <TimerIcon />
-            <div className='leading-none'>
-              <h1 className='text-normal font-bold'>Dia do Cliente</h1>
-              <span className='text-sm'>
-                Ofertas para clientes especiais. Aproveite!
-              </span>
-            </div>
-          </div>
-          <div className='daily-offer-header__countdown'>
-            <div className='flex gap-3'>
-              <span className='hidden md:inline-flex'>Oferta termina em:</span>
-              <span>12:15:30</span>
-            </div>
-          </div>
-        </div>
+      <Container className='px-4'>
+        <DailyOfferHeader />
+        <ProductSlider data={mockProducts} sliderType='fastOffers' />
       </Container>
     </>
   );

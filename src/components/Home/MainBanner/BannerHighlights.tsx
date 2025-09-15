@@ -11,9 +11,9 @@ export const BannerHighlights = () => {
 
   return (
     <Container>
-      <div className='wrapper-banner-highlights w-full my-5'>
+      <div className='wrapper-banner-highlights px-4 w-full my-5'>
         <div className='banner-highlights w-full'>
-          <div className='banner-highlights__content grid grid-cols-2 md:grid-cols-4 gap-4'>
+          <div className='banner-highlights__content grid grid-cols-4 md:grid-cols-4 gap-4'>
             {highlights.map(item => (
               <div className='banner-highlights__item' key={item.description}>
                 <img
