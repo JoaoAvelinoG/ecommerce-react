@@ -4,8 +4,6 @@ import { Pagination, Autoplay, Navigation } from 'swiper/modules';
 // Importa estilos do Swiper (importante!)
 import 'swiper/swiper-bundle.css';
 import { Container } from '@/components/Container';
-import { BannerHighlights } from './BannerHighlights';
-import { DailyOffer } from '../DailyOffer/DailyOffer';
 
 export const MainBanner = () => {
   return (
@@ -52,8 +50,6 @@ export const MainBanner = () => {
           </div>
         </div>
       </main>
-      <BannerHighlights />
-      <DailyOffer />
     </Container>
   );
 };

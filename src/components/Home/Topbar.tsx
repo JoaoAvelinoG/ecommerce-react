@@ -1,5 +1,6 @@
 import { HelpCircleIcon, PersonStandingIcon } from 'lucide-react';
 import { Container } from '../Container';
+import { Link } from 'react-router-dom';
 
 export const Topbar = () => {
   return (
@@ -28,7 +29,12 @@ export const Topbar = () => {
                 <ul className='topbar__links flex gap-4'>
                   <li className='topbar__links__item flex items-center gap-1'>
                     <PersonStandingIcon size={18} />
-                    <p className='text-xs'>Acessibilidade</p>
+                    <Link
+                      to='/institucional/acessibilidade'
+                      className='text-xs'
+                    >
+                      Acessibilidade
+                    </Link>
                   </li>
                   <li className='topbar__links__item flex items-center gap-1'>
                     <HelpCircleIcon size={17} />
