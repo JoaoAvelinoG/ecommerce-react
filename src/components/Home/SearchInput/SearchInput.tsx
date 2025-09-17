@@ -22,7 +22,9 @@ export const SearchInput = ({ isMobile = false }: SearchInputProps) => {
     <Input
       className={clsx(
         'bg-white pl-5 search rounded-full',
-        isMobile ? 'block md:hidden rounded-none py-5' : 'hidden md:block',
+        isMobile
+          ? 'block md:hidden border-none rounded-none py-5 w-full !outline-none !ring-0 !focus:outline-none !focus:ring-0'
+          : 'hidden md:block',
       )}
       placeholder='O que você está procurando?'
       value={query}

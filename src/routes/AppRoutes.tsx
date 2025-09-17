@@ -3,6 +3,9 @@ import { Suspense, lazy } from 'react';
 import { LoadingLogo } from '../components/LoadingLogo';
 import { DefaultLayout } from '../components/Layout/DefaultLayout';
 import ProductPage from '../pages/ProductPage';
+import { SubCategoryPage } from '@/pages/SubCategoryPage';
+import { SignInPage } from '@/pages/SignInPage';
+import { AuthLayout } from '@/components/Layout/AuthLayout';
 
 // Lazy load pages
 const HomePage = lazy(() => import('../pages/HomePage'));
@@ -28,6 +31,26 @@ export function AppRoutes() {
           element={
             <DefaultLayout>
               <ProductPage />
+            </DefaultLayout>
+          }
+        />
+
+        {/* Rota de Entrar */}
+        <Route
+          path='/signin'
+          element={
+            <AuthLayout>
+              <SignInPage />
+            </AuthLayout>
+          }
+        />
+
+        {/* Rota dinâmica de SubCategoria */}
+        <Route
+          path='sub/:category'
+          element={
+            <DefaultLayout>
+              <SubCategoryPage />
             </DefaultLayout>
           }
         />

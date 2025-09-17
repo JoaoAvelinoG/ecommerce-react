@@ -1,4 +1,5 @@
 // Import da lib do Axios;
+import { useAuthStore } from '@/stores/useAuthStore';
 import axios from 'axios';
 
 /**
@@ -13,14 +14,14 @@ export const apiClient = axios.create({
   },
 });
 
-// // Interceptador de requisição — adiciona token automaticamente
-// apiClient.interceptors.request.use(config => {
-//   const token = localStorage.getItem('token');
-//   if (token) {
-//     config.headers.Authorization = `Bearer token`;
-//   }
-//   return config;
-// });
+// Interceptador de requisição — adiciona token automaticamente
+apiClient.interceptors.request.use(config => {
+  const token = useAuthStore.getState().token;
+  if (token) {
+    config.headers.Authorization = `Bearer token`;
+  }
+  return config;
+});
 
 // Interceptador de resposta (tratamento global de erros)
 apiClient.interceptors.response.use(

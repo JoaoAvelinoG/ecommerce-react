@@ -1,22 +1,16 @@
-import { MapPinIcon, MenuIcon } from 'lucide-react';
+import { MenuIcon } from 'lucide-react';
 import { Container } from '../Container';
 import { ContainerFull } from '../ContainerFull';
 import { useDevice } from '@/hooks/useDevice';
 import { NavbarZipcodeMobile } from './NavbarZipcodeMobile';
 import { Link } from 'react-router-dom'; // <-- import Link
+import { mainNavItems } from '@/data/mainNavItems';
+import { CepInput } from './CepInput/CepInput';
 
 export const Navbar = () => {
-  const { screenWidth } = useDevice();
+  // TODO: Trocar os dados mocados por dados vindos da API ou estado global
 
-  const mainNavItems = [
-    { label: 'CORRIDA', href: '/sub/corrida' },
-    { label: 'FUTEBOL', href: '/sub/futebol' },
-    { label: 'SPORTSTYLE', href: '/sub/sportstyle' },
-    { label: 'FEMININO', href: '/sub/feminino' },
-    { label: 'SAÚDE', href: '/sub/saude' },
-    { label: 'OUTLET', href: '/lst' },
-    { label: 'LOJAS PARCEIRAS', href: '/lojasparceiras' },
-  ];
+  const { screenWidth } = useDevice();
 
   return (
     <>
@@ -28,13 +22,7 @@ export const Navbar = () => {
                 <nav className='navbar__content flex gap-3 items-center mr-12'>
                   {/* Section do CEP */}
                   <section className='navbar__zipcode border-r border-zinc-200 pr-6'>
-                    <div className='navbar__zipcode-content text-violet-950 flex items-center gap-2'>
-                      <MapPinIcon />
-                      <span className='flex flex-col text-sm w-full'>
-                        Enviar para:
-                        <strong>37757-000</strong>
-                      </span>
-                    </div>
+                    <CepInput />
                   </section>
 
                   {/* Section de Todas as Categorias */}
