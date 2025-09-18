@@ -3,10 +3,10 @@ import { Container } from '../../Container';
 import { useDevice } from '@/hooks/useDevice';
 import { useScrollPosition } from '@/hooks/useScrollPosition';
 import { SearchInput } from '@/components/Home/SearchInput/SearchInput';
-import { Link } from 'react-router-dom';
-import type { JSX } from 'react';
 import { Logo } from '../Logo/Logo';
-
+import { Link, useNavigate } from 'react-router-dom';
+import type { JSX } from 'react';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,12 +14,13 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { ContainerFull } from '@/components/ContainerFull';
+import { useAuthStore } from '@/stores/useAuthStore';
 
 interface HeaderItem {
   icon: JSX.Element;
   label?: string;
   href?: string;
-  menuItems?: { label: string; href: string }[];
+  menuItems?: { label: string; href?: string; onClick?: () => void }[];
 }
 
 type HeaderProps = {
@@ -30,16 +31,36 @@ export const Header = ({ variant = 'default' }: HeaderProps) => {
   const { screenWidth } = useDevice();
   const scrollY = useScrollPosition();
 
+  const navigate = useNavigate();
+  const isSignedIn = useAuthStore(state => state.isSignedIn);
+  const userData = useAuthStore(state => state.userData);
+  const setToken = useAuthStore(state => state.setToken);
+
+  // Função de logout
+  const handleLogout = () => {
+    setToken(null); // limpa token, isSignedIn e userData
+    navigate('/'); // redireciona para a home
+  };
+
   const mainInteractions: HeaderItem[] = [
     { icon: <HeartIcon />, label: 'Lista de Desejos', href: '/wishlist/intro' },
     {
-      icon: <UserIcon />,
-      label: 'Entrar',
-      menuItems: [
-        { label: 'Login', href: '/signin' },
-        { label: 'Meus Pedidos', href: '/orders' },
-        { label: 'Endereços', href: '/addresses' },
-      ],
+      icon: isSignedIn ? (
+        <Avatar>
+          <AvatarImage src={userData?.picture} />
+          <AvatarFallback>CN</AvatarFallback>
+        </Avatar>
+      ) : (
+        <UserIcon />
+      ),
+      label: isSignedIn ? userData?.name ?? 'Minha conta' : 'Entrar',
+      menuItems: isSignedIn
+        ? [
+            { label: 'Meus Pedidos', href: '/orders' },
+            { label: 'Endereços', href: '/addresses' },
+            { label: 'Sair', onClick: handleLogout },
+          ]
+        : [{ label: 'Login', href: '/signin' }],
     },
     { icon: <ShoppingCartIcon color='white' />, href: '/cart' },
   ];
@@ -91,12 +112,21 @@ export const Header = ({ variant = 'default' }: HeaderProps) => {
                                 asChild
                                 className='hover:!bg-violet-400 hover:!text-white'
                               >
-                                <Link
-                                  className='cursor-pointer'
-                                  to={menuItem.href}
-                                >
-                                  {menuItem.label}
-                                </Link>
+                                {menuItem.onClick ? (
+                                  <button
+                                    onClick={menuItem.onClick}
+                                    className='w-full text-left'
+                                  >
+                                    {menuItem.label}
+                                  </button>
+                                ) : (
+                                  <Link
+                                    className='cursor-pointer'
+                                    to={menuItem.href!}
+                                  >
+                                    {menuItem.label}
+                                  </Link>
+                                )}
                               </DropdownMenuItem>
                             ))}
                           </DropdownMenuContent>
@@ -133,6 +163,7 @@ export const Header = ({ variant = 'default' }: HeaderProps) => {
               </div>
             </Container>
           </header>
+
           {/* Search Mobile */}
           <ContainerFull>
             {screenWidth < 768 && <SearchInput isMobile />}

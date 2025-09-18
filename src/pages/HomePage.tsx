@@ -14,14 +14,15 @@ export default function HomePage() {
   // Executa efeitos colaterais.
   useEffect(() => {
     setCurrentPageData({
-      title: 'Home',
-      description: 'Descrição da Home',
+      title: 'Loja de Artigos Esportivos Online',
+      description: 'Página inicial da Netshoes',
     });
   }, [setCurrentPageData]);
 
   useEffect(() => {
     console.log('Homepage data updated: ', currentPageData);
-    document.title = currentPageData?.title || 'Minha Loja';
+    document.title =
+      currentPageData?.title || 'Loja de Artigos Esportivos Online';
   }, [currentPageData]);
 
   // TODO: Substituir por dados vindos da API ou estado global

@@ -104,6 +104,54 @@ export const createUser = async (
   }
 };
 
+type CreateUserResponse = {
+  id: number;
+  email: string;
+  name: string;
+  role: string;
+  avatar: string;
+};
+
+// Função para cadastrar usuário
+export const createUserWithAnyEmail = async (
+  email: string,
+  password: string,
+  name: string,
+) => {
+  try {
+    // 1. Buscar todos os usuários
+    const { data: users } = await apiClient.get<CreateUserResponse[]>('/users');
+
+    // 2. Verifica se já existe
+    const userExists = users.some(
+      u => u.email.toLowerCase() === email.toLowerCase(),
+    );
+
+    if (userExists) {
+      return { success: false, message: 'Usuário já cadastrado, faça login' };
+    }
+
+    // 3. Cria novo usuário
+    const { data: newUser } = await apiClient.post<CreateUserResponse>(
+      '/users',
+      {
+        email,
+        password,
+        name,
+        avatar: `https://api.dicebear.com/7.x/avataaars/svg?seed=${name}`, // gera avatar automático
+      },
+    );
+
+    return {
+      success: true,
+      user: newUser,
+    };
+  } catch (error) {
+    console.error('Erro ao criar usuário:', error);
+    return { success: false, message: 'Erro inesperado ao criar usuário' };
+  }
+};
+
 /**
  * Gera um token JWT para o usuário usando a API Fake da Platzi.
  *

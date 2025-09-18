@@ -7,7 +7,7 @@ export const Logo = () => {
         <Link to={'/'}>
           <img
             className='w-full h-auto object-cover'
-            src='/svg/netshoes-logo.svg'
+            src='/svg/netshoes-logo-branco.svg'
             alt='Logo'
           />
         </Link>

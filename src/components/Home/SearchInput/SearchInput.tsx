@@ -20,6 +20,7 @@ export const SearchInput = ({ isMobile = false }: SearchInputProps) => {
 
   return (
     <Input
+      id={isMobile ? 'search-mobile' : 'search-desktop'}
       className={clsx(
         'bg-white pl-5 search rounded-full',
         isMobile

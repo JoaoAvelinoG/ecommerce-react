@@ -1,9 +1,21 @@
-import type { JSX } from 'react';
+import { useEffect, type JSX } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { AppRoutes } from './routes/AppRoutes';
 // import { useDevice } from './hooks/useDevice';
 
+import ReactGA from 'react-ga4';
+
+const MEASUREMENT_ID = 'G-P5B8MZQJ1P';
+
 function App(): JSX.Element {
+  useEffect(() => {
+    ReactGA.initialize(MEASUREMENT_ID);
+    ReactGA.send({
+      hitType: 'pageview',
+      page: window.location.pathname,
+      title: 'App.tsx',
+    });
+  }, []);
   // const { isMobile, isIos, screenWidth } = useDevice();
 
   return (
